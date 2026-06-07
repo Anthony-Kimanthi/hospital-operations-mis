@@ -1,6 +1,12 @@
-# Docker setup for Hospital MIS system
-version: '3'
+version: "3.9"
+
 services:
+
+  postgres:
+    image: postgres:16
+
   backend:
+    build: ../backend
+
   frontend:
-  database:
+    build: ../frontend
