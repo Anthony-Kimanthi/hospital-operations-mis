@@ -1,0 +1,6 @@
+# Docker setup for Hospital MIS system
+version: '3'
+services:
+  backend:
+  frontend:
+  database:
