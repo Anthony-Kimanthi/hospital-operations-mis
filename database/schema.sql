@@ -1,0 +1,1 @@
+-- Hospital MIS database schema will go here
