@@ -1,22 +1,24 @@
-# Roles
+# Admin
+- Manage users
+- View all reports
+- Configure system
 
-## Admin
-- Full system access
-
-## Receptionist
+# Receptionist
 - Register patients
-- Create visits
+- Schedule visits
 
-## Doctor
-- View patients
+# Doctor
+- View assigned patients
 - Record diagnoses
 
-## Nurse
+# Nurse
 - Manage admissions
 - Update bed occupancy
 
-## Pharmacist
-- Manage medicine inventory
+# Pharmacist
+- Dispense medication
+- Manage inventory
 
-## Lab Technician
-- Record lab results
+# Lab Technician
+- Manage lab requests
+- Enter results
