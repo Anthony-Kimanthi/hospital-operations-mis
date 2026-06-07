@@ -17,12 +17,22 @@ CREATE TABLE departments (
 
 CREATE TABLE staff (
     id SERIAL PRIMARY KEY,
-    staff_no VARCHAR(20) UNIQUE,
-    full_name VARCHAR(150),
-    role VARCHAR(100),
-    department_id INT REFERENCES departments(id),
-    hire_date DATE,
-    status VARCHAR(20)
+    first_name VARCHAR(100) NOT NULL,
+    last_name VARCHAR(100) NOT NULL,
+    email VARCHAR(150) UNIQUE,
+    phone VARCHAR(20),
+
+    role_id INT NOT NULL,
+
+    department VARCHAR(100),
+    is_active BOOLEAN DEFAULT TRUE,
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT fk_role
+        FOREIGN KEY (role_id)
+        REFERENCES roles(id)
+        ON DELETE RESTRICT
 );
 
 CREATE TABLE visits (
@@ -32,6 +42,10 @@ CREATE TABLE visits (
     visit_type VARCHAR(50),
     status VARCHAR(50)
 );
+
+ALTER TABLE visits
+ADD COLUMN staff_id INT REFERENCES staff(id)
+;
 
 CREATE TABLE beds (
     id SERIAL PRIMARY KEY,
@@ -64,5 +78,78 @@ CREATE TABLE lab_tests (
     status VARCHAR(50),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    password_hash TEXT NOT NULL,
+    email VARCHAR(150) UNIQUE,
+    staff_id INT REFERENCES staff(id),
+    is_active BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE roles (
+    id SERIAL PRIMARY KEY,
+    role_name VARCHAR(50) UNIQUE NOT NULL,
+    description TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO roles (role_name, description) VALUES
+('Admin', 'System administrator with full access'),
+('Doctor', 'Medical doctor handling patients'),
+('Nurse', 'Nursing staff for patient care'),
+('Receptionist', 'Front desk and patient registration'),
+('Pharmacist', 'Manages medication and pharmacy stock'),
+('Lab Technician', 'Handles laboratory tests and results');
+
+CREATE TABLE diagnoses (
+    id SERIAL PRIMARY KEY,
+    visit_id INT REFERENCES visits(id),
+    diagnosis TEXT,
+    notes TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE prescriptions (
+    id SERIAL PRIMARY KEY,
+    visit_id INT REFERENCES visits(id),
+    medicine_id INT REFERENCES medicines(id),
+    quantity INT,
+    dosage VARCHAR(100),
+    instructions TEXT
+);
+
+ALTER TABLE medicines
+ADD COLUMN expiry_date DATE;
+
+ALTER TABLE medicines
+ADD COLUMN batch_no VARCHAR(50);
+
+ALTER TABLE medicines
+ADD COLUMN supplier_name VARCHAR(150)
+;
+
+CREATE TABLE invoices (
+    id SERIAL PRIMARY KEY,
+    patient_id INT REFERENCES patients(id),
+    invoice_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    total_amount DECIMAL(10,2),
+    status VARCHAR(20)
+);
+CREATE TABLE payments (
+    id SERIAL PRIMARY KEY,
+    invoice_id INT REFERENCES invoices(id),
+    amount DECIMAL(10,2),
+    payment_method VARCHAR(50),
+    payment_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+
+
+
+
 
 
