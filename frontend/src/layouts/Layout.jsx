@@ -1,32 +1,38 @@
 import Sidebar from "../components/Sidebar";
+import Header from "../components/Header";
 
 
-export default function Layout({children}){
+export default function Layout({ children }) {
 
-return (
+  return (
+    <div
+      style={{
+        display: "flex",
+        minHeight: "100vh"
+      }}
+    >
 
-<div style={{
-display:"flex"
-}}>
+      <Sidebar />
 
+      <div
+        style={{
+          flex: 1,
+          background: "#f6f8fb"
+        }}
+      >
 
-<Sidebar />
+        <Header />
 
+        <main
+          style={{
+            padding: "25px"
+          }}
+        >
+          {children}
+        </main>
 
-<div style={{
-flex:1,
-padding:"20px",
-background:"#f5f7fb",
-minHeight:"100vh"
-}}>
+      </div>
 
-{children}
-
-</div>
-
-
-</div>
-
-)
-
+    </div>
+  );
 }
