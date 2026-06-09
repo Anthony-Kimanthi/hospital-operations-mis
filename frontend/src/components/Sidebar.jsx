@@ -47,6 +47,14 @@ Visits
 </p>
 
 
+<p>
+<Link to="/patients/register">
+Register Patient
+</Link>
+</p>
+
+
+
 </nav>
 
 
