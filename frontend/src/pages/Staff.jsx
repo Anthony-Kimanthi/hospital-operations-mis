@@ -1,27 +1,32 @@
-export default function Staff() {
-  return (
-    <div>
-      <h1>Staff</h1>
+export default function Staff(){
 
-      <table border="1" cellPadding="10">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Role</th>
-            <th>Department</th>
-            <th>Status</th>
-          </tr>
-        </thead>
 
-        <tbody>
-          <tr>
-            <td>Dr. Smith</td>
-            <td>Doctor</td>
-            <td>Outpatient</td>
-            <td>Active</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  )
+return (
+
+<div>
+
+<h1>
+Staff Directory
+</h1>
+
+
+<ul>
+
+<li>
+Dr. John Smith — Doctor — OPD
+</li>
+
+
+<li>
+Jane Doe — Nurse — Ward A
+</li>
+
+
+</ul>
+
+
+</div>
+
+)
+
 }
