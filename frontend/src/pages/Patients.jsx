@@ -1,9 +1,40 @@
+import DataTable from "../components/DataTable";
+
+
 export default function Patients(){
+
+
+const patients=[
+
+{
+"Patient No":"P0001",
+"Name":"John Doe",
+"Gender":"Male",
+"DOB":"1990-01-01",
+"Status":"Active"
+},
+
+{
+"Patient No":"P0002",
+"Name":"Jane Smith",
+"Gender":"Female",
+"DOB":"1987-04-11",
+"Status":"Admitted"
+}
+
+];
 
 
 return (
 
 <div>
+
+<div
+style={{
+display:"flex",
+justifyContent:"space-between"
+}}
+>
 
 <h1>
 Patients
@@ -15,56 +46,22 @@ Patients
 </button>
 
 
-<table
-style={{
-width:"100%",
-marginTop:"20px",
-background:"white"
-}}
->
+</div>
 
 
-<thead>
+<DataTable
 
-<tr>
+columns={[
+"Patient No",
+"Name",
+"Gender",
+"DOB",
+"Status"
+]}
 
-<th>Patient No</th>
-<th>Name</th>
-<th>Gender</th>
-<th>DOB</th>
+data={patients}
 
-</tr>
-
-</thead>
-
-
-<tbody>
-
-
-<tr>
-
-<td>P0001</td>
-
-<td>
-John Doe
-</td>
-
-<td>
-Male
-</td>
-
-<td>
-1990-01-01
-</td>
-
-
-</tr>
-
-
-</tbody>
-
-
-</table>
+/>
 
 
 </div>
