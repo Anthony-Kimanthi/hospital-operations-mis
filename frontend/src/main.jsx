@@ -16,4 +16,4 @@ document.getElementById("root")
 
 </BrowserRouter>
 
-)
+);
