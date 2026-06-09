@@ -1,14 +1,20 @@
 from fastapi import FastAPI
+from app.api import patients
+
 
 app = FastAPI(
-    title="HOMIS API",
-    description="Hospital Operations Management Information System"
+    title="HOMIS API"
+)
+
+
+app.include_router(
+    patients.router
 )
 
 
 @app.get("/")
 def root():
     return {
-        "system": "HOMIS",
-        "status": "running"
+        "system":"HOMIS",
+        "status":"running"
     }
