@@ -1,10 +1,14 @@
 from fastapi import FastAPI
 
 app = FastAPI(
-    title="Hospital Operations MIS",
-    version="0.1.0"
+    title="HOMIS API",
+    description="Hospital Operations Management Information System"
 )
+
 
 @app.get("/")
 def root():
-    return {"message": "HOMIS API is running"}
+    return {
+        "system": "HOMIS",
+        "status": "running"
+    }
