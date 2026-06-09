@@ -1,4 +1,8 @@
-import {Routes,Route} from "react-router-dom";
+import {
+  Routes,
+  Route
+} from "react-router-dom";
+
 
 import Layout from "./layouts/Layout";
 
@@ -10,7 +14,6 @@ import Visits from "./pages/Visits";
 
 export default function App(){
 
-
 return (
 
 <Routes>
@@ -18,17 +21,31 @@ return (
 <Route element={<Layout/>}>
 
 
-<Route path="/" element={<Dashboard/>}/>
+<Route 
+path="/" 
+element={<Dashboard/>}
+/>
 
-<Route path="/patients" element={<Patients/>}/>
 
-<Route path="/staff" element={<Staff/>}/>
+<Route
+path="/patients"
+element={<Patients/>}
+/>
 
-<Route path="/visits" element={<Visits/>}/>
+
+<Route
+path="/staff"
+element={<Staff/>}
+/>
+
+
+<Route
+path="/visits"
+element={<Visits/>}
+/>
 
 
 </Route>
-
 
 </Routes>
 
