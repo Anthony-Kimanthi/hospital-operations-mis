@@ -1,23 +1,37 @@
-import { useState } from 'react'
-import Dashboard from './pages/Dashboard'
-import Patients from './pages/Patients'
-import Staff from './pages/Staff'
-import Visits from './pages/Visits'
-import Sidebar from './components/Sidebar'
+import {Routes,Route} from "react-router-dom";
 
-export default function App() {
-  const [page, setPage] = useState('dashboard')
+import Layout from "./layouts/Layout";
 
-  return (
-    <div style={{ display: 'flex' }}>
-      <Sidebar setPage={setPage} />
+import Dashboard from "./pages/Dashboard";
+import Patients from "./pages/Patients";
+import Staff from "./pages/Staff";
+import Visits from "./pages/Visits";
 
-      <div style={{ padding: 20, width: '100%' }}>
-        {page === 'dashboard' && <Dashboard />}
-        {page === 'patients' && <Patients />}
-        {page === 'staff' && <Staff />}
-        {page === 'visits' && <Visits />}
-      </div>
-    </div>
-  )
+
+export default function App(){
+
+
+return (
+
+<Routes>
+
+<Route element={<Layout/>}>
+
+
+<Route path="/" element={<Dashboard/>}/>
+
+<Route path="/patients" element={<Patients/>}/>
+
+<Route path="/staff" element={<Staff/>}/>
+
+<Route path="/visits" element={<Visits/>}/>
+
+
+</Route>
+
+
+</Routes>
+
+)
+
 }
