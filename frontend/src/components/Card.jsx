@@ -1,18 +1,28 @@
-export default function Card({title,value}){
+export default function Card({
+title,
+value
+}){
+
 
 return (
 
-<div style={{
+<div
+style={{
 background:"white",
 padding:"20px",
 borderRadius:"12px",
 boxShadow:"0 2px 8px #ddd"
-}}>
+}}
+>
+
+<h3>
+{title}
+</h3>
 
 
-<h3>{title}</h3>
-
-<h1>{value}</h1>
+<h1>
+{value}
+</h1>
 
 
 </div>
