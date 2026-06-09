@@ -10,7 +10,7 @@ import Dashboard from "./pages/Dashboard";
 import Patients from "./pages/Patients";
 import Staff from "./pages/Staff";
 import Visits from "./pages/Visits";
-
+import RegisterPatient from "./pages/RegisterPatient";
 
 export default function App(){
 
@@ -43,7 +43,10 @@ element={<Staff/>}
 path="/visits"
 element={<Visits/>}
 />
-
+<Route
+path="/patients/register"
+element={<RegisterPatient/>}
+/>
 
 </Route>
 
