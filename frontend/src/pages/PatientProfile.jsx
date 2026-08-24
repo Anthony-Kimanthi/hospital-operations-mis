@@ -1,26 +1,77 @@
-const patient = {
-  patientNo: "PT-2026-00124",
-  firstName: "John",
-  lastName: "Kamau",
-  gender: "Male",
-  dateOfBirth: "14 Apr 1988",
-  phone: "0712 345 678",
-  address: "Nairobi, Kenya",
-  status: "Active",
+import { useNavigate, useParams } from "react-router-dom";
+
+const patients = {
+  "PT-2026-00124": {
+    patientNo: "PT-2026-00124",
+    firstName: "John",
+    lastName: "Kamau",
+    gender: "Male",
+    dateOfBirth: "14 Apr 1988",
+    phone: "0712 345 678",
+    address: "Nairobi, Kenya",
+    status: "Active",
+  },
+
+  "PT-2026-00123": {
+    patientNo: "PT-2026-00123",
+    firstName: "Mary",
+    lastName: "Wanjiku",
+    gender: "Female",
+    dateOfBirth: "21 Aug 1992",
+    phone: "0723 456 789",
+    address: "Nairobi, Kenya",
+    status: "Active",
+  },
+
+  "PT-2026-00122": {
+    patientNo: "PT-2026-00122",
+    firstName: "David",
+    lastName: "Mwangi",
+    gender: "Male",
+    dateOfBirth: "10 Feb 1979",
+    phone: "0701 234 567",
+    address: "Kiambu, Kenya",
+    status: "Inactive",
+  },
+
+  "PT-2026-00121": {
+    patientNo: "PT-2026-00121",
+    firstName: "Grace",
+    lastName: "Njeri",
+    gender: "Female",
+    dateOfBirth: "03 Nov 1996",
+    phone: "0798 123 456",
+    address: "Nairobi, Kenya",
+    status: "Active",
+  },
+
+  "PT-2026-00120": {
+    patientNo: "PT-2026-00120",
+    firstName: "Peter",
+    lastName: "Ochieng",
+    gender: "Male",
+    dateOfBirth: "17 Jun 1985",
+    phone: "0715 987 654",
+    address: "Nairobi, Kenya",
+    status: "Active",
+  },
 };
 
 const visits = [
   {
+    id: 1,
     date: "24 Aug 2026",
     type: "General Consultation",
     status: "Completed",
   },
   {
+    id: 2,
     date: "18 Aug 2026",
     type: "Follow-up",
     status: "Completed",
   },
   {
+    id: 3,
     date: "04 Aug 2026",
     type: "Laboratory",
     status: "Completed",
@@ -29,11 +80,13 @@ const visits = [
 
 const diagnoses = [
   {
+    id: 1,
     date: "24 Aug 2026",
     diagnosis: "Upper respiratory tract infection",
     clinician: "Dr. James Mwangi",
   },
   {
+    id: 2,
     date: "18 Aug 2026",
     diagnosis: "Hypertension",
     clinician: "Dr. Sarah Wambui",
@@ -42,12 +95,14 @@ const diagnoses = [
 
 const labTests = [
   {
+    id: 1,
     date: "24 Aug 2026",
     test: "Complete Blood Count",
     status: "Completed",
     result: "Normal",
   },
   {
+    id: 2,
     date: "24 Aug 2026",
     test: "Malaria Test",
     status: "Pending",
@@ -56,18 +111,56 @@ const labTests = [
 ];
 
 function PatientProfile() {
+  const navigate = useNavigate();
+  const { patientId } = useParams();
+
+  const patient = patients[patientId];
+
+  // Handle an invalid patient number gracefully.
+  if (!patient) {
+    return (
+      <div className="page">
+        <div className="page-heading">
+          <div>
+            <h1>Patient Not Found</h1>
+            <p>
+              No patient record was found for {patientId}.
+            </p>
+          </div>
+
+          <button
+            className="secondary-button"
+            type="button"
+            onClick={() => navigate("/patients")}
+          >
+            ← Back to Patients
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  const patientInitials = `${patient.firstName.charAt(
+    0
+  )}${patient.lastName.charAt(0)}`;
+
   return (
     <div className="page">
-      {/* Header */}
+      {/* Patient Header */}
 
       <div className="patient-profile-header">
         <div className="patient-profile-title">
-          <button className="back-button" type="button">
+          <button
+            className="back-button"
+            type="button"
+            onClick={() => navigate("/patients")}
+            aria-label="Back to patients"
+          >
             ←
           </button>
 
           <div className="patient-avatar">
-            JK
+            {patientInitials}
           </div>
 
           <div>
@@ -86,17 +179,23 @@ function PatientProfile() {
             {patient.status}
           </span>
 
-          <button className="secondary-button" type="button">
+          <button
+            className="secondary-button"
+            type="button"
+          >
             Edit Patient
           </button>
 
-          <button className="primary-button" type="button">
+          <button
+            className="primary-button"
+            type="button"
+          >
             + New Visit
           </button>
         </div>
       </div>
 
-      {/* Demographics */}
+      {/* Patient Information + Summary */}
 
       <section className="profile-grid">
         <div className="profile-card">
@@ -177,7 +276,10 @@ function PatientProfile() {
             <p>Patient visit history</p>
           </div>
 
-          <button className="text-button" type="button">
+          <button
+            className="text-button"
+            type="button"
+          >
             View all
           </button>
         </div>
@@ -194,9 +296,11 @@ function PatientProfile() {
 
             <tbody>
               {visits.map((visit) => (
-                <tr key={`${visit.date}-${visit.type}`}>
+                <tr key={visit.id}>
                   <td>{visit.date}</td>
+
                   <td>{visit.type}</td>
+
                   <td>
                     <span className="status-badge status-completed">
                       {visit.status}
@@ -209,7 +313,7 @@ function PatientProfile() {
         </div>
       </section>
 
-      {/* Clinical + Laboratory */}
+      {/* Diagnoses + Laboratory */}
 
       <section className="profile-grid">
         <div className="profile-card">
@@ -224,7 +328,7 @@ function PatientProfile() {
             {diagnoses.map((item) => (
               <div
                 className="clinical-list-item"
-                key={`${item.date}-${item.diagnosis}`}
+                key={item.id}
               >
                 <div>
                   <strong>{item.diagnosis}</strong>
@@ -244,7 +348,10 @@ function PatientProfile() {
               <p>Recent laboratory investigations</p>
             </div>
 
-            <button className="text-button" type="button">
+            <button
+              className="text-button"
+              type="button"
+            >
               View all
             </button>
           </div>
@@ -253,7 +360,7 @@ function PatientProfile() {
             {labTests.map((test) => (
               <div
                 className="clinical-list-item"
-                key={`${test.date}-${test.test}`}
+                key={test.id}
               >
                 <div>
                   <strong>{test.test}</strong>
@@ -273,7 +380,7 @@ function PatientProfile() {
         </div>
       </section>
 
-      {/* Pharmacy + Admissions + Billing */}
+      {/* Prescriptions + Admissions + Billing */}
 
       <section className="profile-grid profile-grid-three">
         <div className="profile-card mini-profile-card">
@@ -282,9 +389,15 @@ function PatientProfile() {
           </div>
 
           <div className="empty-state">
-            <div className="empty-state-icon">Rx</div>
+            <div className="empty-state-icon">
+              Rx
+            </div>
+
             <strong>No recent prescriptions</strong>
-            <span>Prescription history will appear here.</span>
+
+            <span>
+              Prescription history will appear here.
+            </span>
           </div>
         </div>
 
@@ -294,9 +407,15 @@ function PatientProfile() {
           </div>
 
           <div className="empty-state">
-            <div className="empty-state-icon">▥</div>
+            <div className="empty-state-icon">
+              ▥
+            </div>
+
             <strong>No admissions</strong>
-            <span>Admission history will appear here.</span>
+
+            <span>
+              Admission history will appear here.
+            </span>
           </div>
         </div>
 
@@ -307,8 +426,12 @@ function PatientProfile() {
 
           <div className="billing-summary">
             <span>Outstanding Balance</span>
+
             <strong>KES 0.00</strong>
-            <small>No outstanding invoices</small>
+
+            <small>
+              No outstanding invoices
+            </small>
           </div>
         </div>
       </section>
