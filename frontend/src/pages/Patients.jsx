@@ -1,3 +1,13 @@
+import { useNavigate } from "react-router-dom";
+
+const patients = [
+  // existing data...
+];
+
+function Patients() {
+  const navigate = useNavigate();
+
+  return (
 const patients = [
   {
     patientNo: "PT-2026-00124",
