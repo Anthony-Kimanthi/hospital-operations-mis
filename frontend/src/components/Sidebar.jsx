@@ -1,65 +1,83 @@
-import {Link} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
+const menuSections = [
+  {
+    title: "MAIN",
+    items: [
+      { label: "Dashboard", path: "/", icon: "▦" },
+    ],
+  },
+  {
+    title: "PATIENT CARE",
+    items: [
+      { label: "Patients", path: "/patients", icon: "♙" },
+      { label: "Visits", path: "/visits", icon: "◉" },
+      { label: "Admissions", path: "/admissions", icon: "▣" },
+      { label: "Beds", path: "/beds", icon: "▥" },
+    ],
+  },
+  {
+    title: "CLINICAL",
+    items: [
+      { label: "Diagnoses", path: "/diagnoses", icon: "✚" },
+      { label: "Prescriptions", path: "/prescriptions", icon: "Rx" },
+      { label: "Laboratory", path: "/laboratory", icon: "⌬" },
+    ],
+  },
+  {
+    title: "PHARMACY",
+    items: [
+      { label: "Medicines", path: "/pharmacy", icon: "⚕" },
+      { label: "Inventory", path: "/inventory", icon: "▤" },
+      { label: "Dispensing", path: "/dispensing", icon: "▰" },
+    ],
+  },
+  {
+    title: "ADMINISTRATION",
+    items: [
+      { label: "Staff", path: "/staff", icon: "♙" },
+      { label: "Doctors", path: "/doctors", icon: "⚕" },
+      { label: "Nurses", path: "/nurses", icon: "♧" },
+      { label: "Billing", path: "/billing", icon: "¤" },
+      { label: "Reports", path: "/reports", icon: "▥" },
+    ],
+  },
+];
 
-export default function Sidebar(){
+function Sidebar() {
+  return (
+    <aside className="sidebar">
+      <div className="sidebar-brand">
+        <div className="brand-icon">✚</div>
 
-return (
+        <div>
+          <div className="brand-name">HOMIS</div>
+          <div className="brand-subtitle">Hospital Operations</div>
+        </div>
+      </div>
 
-<div style={{
-width:"230px",
-background:"#111827",
-color:"white",
-height:"100vh",
-padding:"20px"
-}}>
+      <nav className="sidebar-nav">
+        {menuSections.map((section) => (
+          <div className="nav-section" key={section.title}>
+            <div className="nav-section-title">{section.title}</div>
 
-
-<h2>🏥 HOMIS</h2>
-
-
-<nav>
-
-<p>
-<Link to="/" style={{color:"white"}}>
-Dashboard
-</Link>
-</p>
-
-
-<p>
-<Link to="/patients" style={{color:"white"}}>
-Patients
-</Link>
-</p>
-
-
-<p>
-<Link to="/staff" style={{color:"white"}}>
-Staff
-</Link>
-</p>
-
-
-<p>
-<Link to="/visits" style={{color:"white"}}>
-Visits
-</Link>
-</p>
-
-
-<p>
-<Link to="/patients/register">
-Register Patient
-</Link>
-</p>
-
-
-
-</nav>
-
-
-</div>
-
-)
-
+            {section.items.map((item) => (
+              <NavLink
+                key={item.path}
+                to={item.path}
+                className={({ isActive }) =>
+                  `nav-link ${isActive ? "active" : ""}`
+                }
+              >
+                <span className="nav-icon">{item.icon}</span>
+                <span>{item.label}</span>
+              </NavLink>
+            ))}
+          </div>
+        ))}
+      </nav>
+    </aside>
+  );
 }
+
+export default Sidebar;
