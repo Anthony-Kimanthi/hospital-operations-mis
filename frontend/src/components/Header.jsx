@@ -1,31 +1,34 @@
-export default function Header(){
+function Header() {
+  return (
+    <header className="top-header">
+      <div className="header-left">
+        <div className="header-title">
+          Hospital Operations Management Information System
+        </div>
+        <div className="header-subtitle">
+          Healthcare Operations &amp; Analytics
+        </div>
+      </div>
 
-return (
+      <div className="header-right">
+        <button className="notification-button" type="button" title="Notifications">
+          🔔
+          <span className="notification-badge">3</span>
+        </button>
 
-<header
-style={{
-height:"70px",
-background:"#ffffff",
-display:"flex",
-alignItems:"center",
-justifyContent:"space-between",
-padding:"0 25px",
-borderBottom:"1px solid #ddd"
-}}
->
+        <div className="user-profile">
+          <div className="user-avatar">A</div>
 
-<h2>
-Hospital Operations MIS
-</h2>
+          <div className="user-details">
+            <div className="user-name">Administrator</div>
+            <div className="user-role">System Administrator</div>
+          </div>
 
-
-<div>
-Admin
-</div>
-
-
-</header>
-
-)
-
+          <span className="user-chevron">⌄</span>
+        </div>
+      </div>
+    </header>
+  );
 }
+
+export default Header;
