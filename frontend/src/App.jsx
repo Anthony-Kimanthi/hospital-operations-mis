@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import Layout from "./layouts/Layout";
 
@@ -11,47 +11,30 @@ import Visits from "./pages/Visits";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route element={<Layout />}>
-          {/* Dashboard */}
+    <Routes>
+      <Route element={<Layout />}>
+        {/* Dashboard */}
+        <Route path="/" element={<Dashboard />} />
 
-          <Route
-            path="/"
-            element={<Dashboard />}
-          />
+        {/* Patients */}
+        <Route path="/patients" element={<Patients />} />
 
-          {/* Patients */}
+        <Route
+          path="/patients/register"
+          element={<RegisterPatient />}
+        />
 
-          <Route
-            path="/patients"
-            element={<Patients />}
-          />
+        <Route
+          path="/patients/:patientId"
+          element={<PatientProfile />}
+        />
 
-          <Route
-            path="/patients/register"
-            element={<RegisterPatient />}
-          />
+        {/* Other modules */}
+        <Route path="/staff" element={<Staff />} />
 
-          <Route
-            path="/patients/:patientId"
-            element={<PatientProfile />}
-          />
-
-          {/* Other modules */}
-
-          <Route
-            path="/staff"
-            element={<Staff />}
-          />
-
-          <Route
-            path="/visits"
-            element={<Visits />}
-          />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+        <Route path="/visits" element={<Visits />} />
+      </Route>
+    </Routes>
   );
 }
 
