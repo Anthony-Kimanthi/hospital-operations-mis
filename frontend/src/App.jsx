@@ -14,20 +14,41 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route element={<Layout />}>
-          <Route path="/" element={<Dashboard />} />
+          {/* Dashboard */}
 
-          <Route path="/patients" element={<Patients />} />
+          <Route
+            path="/"
+            element={<Dashboard />}
+          />
+
+          {/* Patients */}
+
+          <Route
+            path="/patients"
+            element={<Patients />}
+          />
+
           <Route
             path="/patients/register"
             element={<RegisterPatient />}
           />
+
           <Route
             path="/patients/:patientId"
             element={<PatientProfile />}
           />
 
-          <Route path="/staff" element={<Staff />} />
-          <Route path="/visits" element={<Visits />} />
+          {/* Other modules */}
+
+          <Route
+            path="/staff"
+            element={<Staff />}
+          />
+
+          <Route
+            path="/visits"
+            element={<Visits />}
+          />
         </Route>
       </Routes>
     </BrowserRouter>
