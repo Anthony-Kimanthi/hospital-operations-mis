@@ -1,14 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
 const patients = [
-  // existing data...
-];
-
-function Patients() {
-  const navigate = useNavigate();
-
-  return (
-const patients = [
   {
     patientNo: "PT-2026-00124",
     firstName: "John",
@@ -57,6 +49,16 @@ const patients = [
 ];
 
 function Patients() {
+  const navigate = useNavigate();
+
+  const handleViewPatient = (patientNo) => {
+    navigate(`/patients/${patientNo}`);
+  };
+
+  const handleRegisterPatient = () => {
+    navigate("/patients/register");
+  };
+
   return (
     <div className="page">
       <div className="page-heading">
@@ -65,12 +67,18 @@ function Patients() {
           <p>Manage patient records and demographics</p>
         </div>
 
-        <button className="primary-button" type="button">
+        <button
+          className="primary-button"
+          type="button"
+          onClick={handleRegisterPatient}
+        >
           + Register Patient
         </button>
       </div>
 
       <div className="page-card">
+        {/* Toolbar */}
+
         <div className="patient-toolbar">
           <div className="search-box">
             <span>⌕</span>
@@ -87,6 +95,8 @@ function Patients() {
             <option value="inactive">Inactive</option>
           </select>
         </div>
+
+        {/* Patient Table */}
 
         <div className="table-wrapper">
           <table className="data-table">
@@ -130,7 +140,13 @@ function Patients() {
                   </td>
 
                   <td>
-                    <button className="table-action" type="button">
+                    <button
+                      className="table-action"
+                      type="button"
+                      onClick={() =>
+                        handleViewPatient(patient.patientNo)
+                      }
+                    >
                       View
                     </button>
                   </td>
@@ -140,16 +156,27 @@ function Patients() {
           </table>
         </div>
 
+        {/* Footer */}
+
         <div className="table-footer">
           <span>Showing 5 of 1,248 patients</span>
 
           <div className="pagination">
-            <button type="button">Previous</button>
-            <button type="button" className="pagination-active">
+            <button type="button">
+              Previous
+            </button>
+
+            <button
+              type="button"
+              className="pagination-active"
+            >
               1
             </button>
+
             <button type="button">2</button>
+
             <button type="button">3</button>
+
             <button type="button">Next</button>
           </div>
         </div>
